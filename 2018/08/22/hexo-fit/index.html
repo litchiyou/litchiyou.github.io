@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Litchi">
 <meta property="og:description" content="刚开始博客是搭建在 GitHub 上的，但是回到学校后自己买了一个vps服务器搭建ss，如果只是为了翻墙上谷歌查资料又觉得有点浪费，于是尝试通过githook实现自动化部署到vps。虽然成功部署消耗时间不长，但过程中还是遇到了不少坑，于是想写个blog总结一下。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-06T06:53:43.637Z">
+<meta property="og:updated_time" content="2018-09-06T12:36:45.319Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="通过githook将hexo部署vps">
 <meta name="twitter:description" content="刚开始博客是搭建在 GitHub 上的，但是回到学校后自己买了一个vps服务器搭建ss，如果只是为了翻墙上谷歌查资料又觉得有点浪费，于是尝试通过githook实现自动化部署到vps。虽然成功部署消耗时间不长，但过程中还是遇到了不少坑，于是想写个blog总结一下。">
@@ -168,7 +168,101 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>刚开始博客是搭建在 GitHub 上的，但是回到学校后自己买了一个vps服务器搭建ss，如果只是为了翻墙上谷歌查资料又觉得有点浪费，于是尝试通过githook实现自动化部署到vps。虽然成功部署消耗时间不长，但过程中还是遇到了不少坑，于是想写个blog总结一下。</p>
+<a id="more"></a>
 <hr>
+<h1 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h1><p>  首先介绍一下hexo静态博客引擎，使用node.js编写，官网是这么说的：</p>
+<blockquote>
+<p>A fast, simple &amp; powerful blog framework</p>
+</blockquote>
+<hr>
+<p>意为「快速、简洁且高效的博客框架」，通俗的来说，Hexo 是一个静态博客生成引擎，用户可以使用文本编辑器写作，然后再用 Hexo 生成 Html 文件。</p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><h2 id="安装Git和Node-js"><a href="#安装Git和Node-js" class="headerlink" title="安装Git和Node.js"></a>安装Git和Node.js</h2><p>本地需要安装 <a href="https://git-scm.com/book/zh/v1/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git" target="_blank" rel="noopener">Git</a> 和 <a href="https://nodejs.org/en/download/current/" target="_blank" rel="noopener">Node.js</a>，安装过程参考官方文档，关于 Git 的配置和学习推荐廖雪峰的<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener"> Git 教程</a><br><br></p>
+<p>Windows上安装 Git for Windows 之后在开始菜单里打开 Git Bash 输入：<br></p>
+<blockquote>
+<p>1.git config –global user.name “你的用户名”<br><br>2.git config –global user.email “你的电子邮箱”<br></p>
+</blockquote>
+<p> 生成密钥</p>
+<blockquote>
+<p> cd ~<br><br> mkdir .ssh<br><br> cd .ssh<br><br> ssh-keygen -t rsa<br></p>
+</blockquote>
+<h2 id="初始化Hexo"><a href="#初始化Hexo" class="headerlink" title="初始化Hexo"></a>初始化Hexo</h2><p>在电脑任意目录新建一个文件夹 blog，进入文件夹，并执行初始化</p>
+<blockquote>
+<p>mkdir blog<br><br>cd blog<br><br>npm install -g hexo-cli<br><br>hexo init<br></p>
+</blockquote>
+<p>输入：</p>
+<blockquote>
+<p>hexo new post “Hello World”<br></p>
+</blockquote>
+<p>即可新建一篇文章。文章以.md格式保存在blog目录下的sourse/post,用支持markdown语法编辑器即可写作。<br></p>
+<h2 id="修改主题参数："><a href="#修改主题参数：" class="headerlink" title="修改主题参数："></a>修改主题参数：</h2><p>由于本人使用yilia主题，参考配置：</p>
+<blockquote>
+<p><a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="noopener">https://github.com/litten/hexo-theme-yilia</a><br></p>
+</blockquote>
+<h2 id="VPS配置"><a href="#VPS配置" class="headerlink" title="VPS配置"></a>VPS配置</h2><p>本人使用Xshell连接vps服务器，服务器是Centos7<br><br>关于服务器的选购，个人推荐还是vultr厂商的性价比较高</p>
+<h2 id="新建用户和授权"><a href="#新建用户和授权" class="headerlink" title="新建用户和授权"></a>新建用户和授权</h2><blockquote>
+<p>adduser git<br><br>passwd git<br><br>gpasswd -a git sudo<br></p>
+</blockquote>
+<p>此处本人遇到个坑，需要配置sudoers</p>
+<blockquote>
+<p>[root@localhost ~]# ls -l /etc/sudoers<br><br>-r–r—– 1 root root 4251 9月  25 15:08 /etc/sudoers<br><br>[root@localhost ~]# chmod -v u+w /etc/sudoers<br><br>mode of “/etc/sudoers” changed from 0440 (r–r—–) to 0640 (rw-r—–)</p>
+</blockquote>
+<p>然后在sudoers找到以下代码添加新增的用户，然后:wq保存退出</p>
+<blockquote>
+<p>[root@localhost ~]# vim /etc/sudoers</p>
+</blockquote>
+<blockquote>
+<h2 id="Allow-root-to-run-any-commands-anywher"><a href="#Allow-root-to-run-any-commands-anywher" class="headerlink" title="Allow root to run any commands anywher"></a>Allow root to run any commands anywher</h2><p>root    ALL=(ALL)       ALL<br>git     ALL=(ALL)       ALL  #这个是新增的用户</p>
+</blockquote>
+<h2 id="上传ssh公钥"><a href="#上传ssh公钥" class="headerlink" title="上传ssh公钥"></a>上传ssh公钥</h2><p>在本地打开git.bash 或者cmd</p>
+<blockquote>
+<p>ssh-copy-id -i ~/.ssh/id_rsa.pub git@服务器ip地址</p>
+</blockquote>
+<h2 id="安装git和nginx"><a href="#安装git和nginx" class="headerlink" title="安装git和nginx"></a>安装git和nginx</h2><p>更新源</p>
+<blockquote>
+<p>su git<br><br>sudo yum update<br></p>
+</blockquote>
+<p>安装</p>
+<blockquote>
+<p>yum install git-core nginx</p>
+</blockquote>
+<p>配置Git</p>
+<blockquote>
+<p>mkdir hexo.git<br><br>cd hexo.git<br><br>git init –bare</p>
+</blockquote>
+<p>创建网站目录</p>
+<blockquote>
+<p>cd /var/www<br><br>mkdir hexo</p>
+</blockquote>
+<p>变更权限</p>
+<blockquote>
+<p>chown git:git -R /var/www/hexo</p>
+</blockquote>
+<p>配置 Git Hooks</p>
+<blockquote>
+<p>cd ~/hexo.git/hooks</p>
+</blockquote>
+<p>编辑post-receive文件：</p>
+<blockquote>
+<p>sudo vi post-receive</p>
+<p> #!/bin/bash<br>GIT_REPO=/home/git/hexo.git #git 仓库<br><br>TMP_GIT_CLONE=/tmp/hexo<br><br>PUBLIC_WWW=/var/www/hexo #网站目录<br><br>rm -rf ${TMP_GIT_CLONE}<br><br>git clone $GIT_REPO $TMP_GIT_CLONE<br><br>rm -rf ${PUBLIC_WWW}/<em><br><br>cp -rf ${TMP_GIT_CLONE}/</em> ${PUBLIC_WWW}</p>
+</blockquote>
+<p>赋予可执行权限：</p>
+<blockquote>
+<p>sudo chmod +x post-receive</p>
+</blockquote>
+<p>配置 Nginx<br></p>
+<blockquote>
+<p>vi /etc/nginx/conf.d/hexo.conf<br><br>server {<br><br>  listen         80 ;<br><br>  root /var/www/hexo;<br><br>  server_name blog.yizhilee.com;<br><br>  access_log  /var/log/nginx/hexo_access.log;<br><br>  error_log   /var/log/nginx/hexo_error.log;<br><br>  location ~<em> ^.+.(ico|gif|jpg|jpeg|png)$ {<br><br>    root /var/www/hexo;<br><br>    access_log   off;<br><br>    expires      1d;<br><br>  }<br><br>  location ~</em> ^.+.(css|js|txt|xml|swf|wav)$ {<br><br>    root /var/www/hexo;<br><br>    access_log   off;<br><br>    expires      10m;<br><br>  }<br><br>  location / {<br><br>    root /var/www/hexo;//这里可以改成你的网站目录地址，我将网站放在 <code>/var/www/hexo</code>（请记得删除这段中文注释）<br><br>    if (-f $request_filename) {<br><br>    rewrite ^/(.*)$  /$1 break;<br><br>    }<br><br>  }<br><br>}<br></p>
+</blockquote>
+<p>然后重启 Nginx：</p>
+<blockquote>
+<p>sudo service nginx restart</p>
+</blockquote>
+<p>如果有报错可以执行以下命令了解具体错误细节</p>
+<blockquote>
+<p>nginx -t</p>
+</blockquote>
+<h2 id="发布文章"><a href="#发布文章" class="headerlink" title="发布文章"></a>发布文章</h2><p>在本地编辑好文章之后使用 hexo g 生成静态网页，hexo s 在本地预览，hexo d 提交到服务器。</p>
 
       
 
@@ -271,7 +365,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hexo"><span class="toc-number">1.</span> <span class="toc-text">Hexo</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#准备工作"><span class="toc-number">2.</span> <span class="toc-text">准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Git和Node-js"><span class="toc-number">2.1.</span> <span class="toc-text">安装Git和Node.js</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#初始化Hexo"><span class="toc-number">2.2.</span> <span class="toc-text">初始化Hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改主题参数："><span class="toc-number">2.3.</span> <span class="toc-text">修改主题参数：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VPS配置"><span class="toc-number">2.4.</span> <span class="toc-text">VPS配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#新建用户和授权"><span class="toc-number">2.5.</span> <span class="toc-text">新建用户和授权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Allow-root-to-run-any-commands-anywher"><span class="toc-number">2.6.</span> <span class="toc-text">Allow root to run any commands anywher</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#上传ssh公钥"><span class="toc-number">2.7.</span> <span class="toc-text">上传ssh公钥</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装git和nginx"><span class="toc-number">2.8.</span> <span class="toc-text">安装git和nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#发布文章"><span class="toc-number">2.9.</span> <span class="toc-text">发布文章</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
