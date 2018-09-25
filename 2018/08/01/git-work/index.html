@@ -16,12 +16,12 @@
 <meta property="og:site_name" content="Litchi">
 <meta property="og:description" content="在此次实习中因为接触到Git工作流，个人觉得在以后还是必须掌握的技能因此简单整理一下我对Git的了解">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2018/08/01/git-work/G:/blogs/source/_posts/git-work/git.png">
-<meta property="og:updated_time" content="2018-09-25T09:22:19.019Z">
+<meta property="og:image" content="http://yoursite.com/2018/08/01/git-work/git.png">
+<meta property="og:updated_time" content="2018-09-25T09:33:38.959Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git使用整理">
 <meta name="twitter:description" content="在此次实习中因为接触到Git工作流，个人觉得在以后还是必须掌握的技能因此简单整理一下我对Git的了解">
-<meta name="twitter:image" content="http://yoursite.com/2018/08/01/git-work/G:/blogs/source/_posts/git-work/git.png">
+<meta name="twitter:image" content="http://yoursite.com/2018/08/01/git-work/git.png">
   
   
     <link rel="icon" href="/favicon.png">
@@ -60,9 +60,9 @@
 		<nav class="header-menu">
 			<ul>
 			
-				<li><a href="/">主页</a></li>
+				<li><a href="../../../../index.html">主页</a></li>
 	        
-				<li><a href="/tags/随笔/">随笔</a></li>
+				<li><a href="../../../../tags/随笔/">随笔</a></li>
 	        
 			</ul>
 		</nav>
@@ -132,9 +132,9 @@
 				<ul style="width: 50%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
+					<li style="width: 50%"><a href="../../../../index.html">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 50%"><a href="../../../../tags/随笔/">随笔</a></li>
 		        
 				</ul>
 			</nav>
@@ -161,7 +161,7 @@
   
 
         
-        <a href="/2018/08/01/git-work/" class="archive-article-date">
+        <a href="" class="archive-article-date">
   	<time datetime="2018-08-01T03:56:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-01</time>
 </a>
         
@@ -184,51 +184,39 @@
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git<span class="built_in"> config </span>--global user.name <span class="string">"Your Name"</span></span><br><span class="line">$ git<span class="built_in"> config </span>--global user.email <span class="string">"email@example.com"</span></span><br></pre></td></tr></table></figure>
 <h1 id="Git工作流"><a href="#Git工作流" class="headerlink" title="Git工作流"></a>Git工作流</h1><p>当多个开发者同时涉及到一个项目时那么就非常有必要正确使用 Git 工作流。</p>
 <p>以下这种工作流是比较常见的多人大型项目中的工作流。</p>
-<p><img src="/2018/08/01/git-work/G:/blogs\source\_posts\git-work\git.png" alt="git"></p>
+<p><img src="/2018/08/01/git-work/git.png" alt="git"></p>
 <h2 id="Git的开发流程"><a href="#Git的开发流程" class="headerlink" title="Git的开发流程"></a>Git的开发流程</h2><h3 id="Master分支"><a href="#Master分支" class="headerlink" title="Master分支"></a>Master分支</h3><ol>
-<li><p>Master 分支应该始终和生产环境保持一致。</p>
-</li>
-<li><p>由于 master 和生产代码是一致的，所以基本上不会在master分支上做开发。</p>
-</li>
-<li><p>真正做分发的时候应当在Master分支为基线下创建分支。</p>
-</li>
+<li>Master 分支应该始终和生产环境保持一致。</li>
+<li>由于 master 和生产代码是一致的，所以基本上不会在master分支上做开发。</li>
+<li>真正做分发的时候应当在Master分支为基线下创建分支。</li>
 </ol>
 <h3 id="Release（发布）分支"><a href="#Release（发布）分支" class="headerlink" title="Release（发布）分支"></a>Release（发布）分支</h3><ol>
-<li><p>当项目开始时，应该创建一个发布分支。这个发布分支应当是基于Master分支创建的。</p>
-</li>
-<li><p>可能有多个项目都基于同一份代码运行，因此对于每一个项目来说都需要创建一个独立的发布分支。假设现在还有一个项目正在并行运行，那就得为这个项目创建一个单独的发布分支比如 <code>release/messenger</code>。</p>
-</li>
-<li><p>需要单独的发布分支的原因是：多个并行项目是基于同一份代码运行的，但是项目之间不能有冲突。</p>
-</li>
+<li>当项目开始时，应该创建一个发布分支。这个发布分支应当是基于Master分支创建的。</li>
+<li>可能有多个项目都基于同一份代码运行，因此对于每一个项目来说都需要创建一个独立的发布分支。假设现在还有一个项目正在并行运行，那就得为这个项目创建一个单独的发布分支比如 <code>release/messenger</code>。</li>
+<li>需要单独的发布分支的原因是：多个并行项目是基于同一份代码运行的，但是项目之间不能有冲突。</li>
 </ol>
 <h3 id="Feature-功能分支-branch"><a href="#Feature-功能分支-branch" class="headerlink" title="Feature(功能分支) branch"></a>Feature(功能分支) branch</h3><ol>
-<li><p>对于应用中的每一个功能都应该创建一个独立的功能分支，这会确保这些功能能被单独构建。</p>
-</li>
-<li><p>这个功能分支通常是基于 Release(发布) 分支 创建而来。</p>
-</li>
-<li><p>所有的开发人员都应当在开发自己负责的功能的时候创建自己的功能分支。</p>
-</li>
-<li><p>当开发人员完成自己的任务代码的时候应该提交到Release分支。这个过程是通过发起一个 <code>pull request</code> 完成的。</p>
-</li>
+<li>对于应用中的每一个功能都应该创建一个独立的功能分支，这会确保这些功能能被单独构建。</li>
+<li>这个功能分支通常是基于 Release(发布) 分支 创建而来。</li>
+<li>所有的开发人员都应当在开发自己负责的功能的时候创建自己的功能分支。</li>
+<li>当开发人员完成自己的任务代码的时候应该提交到Release分支。这个过程是通过发起一个 <code>pull request</code> 完成的。</li>
 </ol>
 <h3 id="Pull-request"><a href="#Pull-request" class="headerlink" title="Pull request"></a>Pull request</h3><p>首先 <code>pull request</code> 不能和 <code>git pull</code> 搞混了。</p>
 <p>开发人员不能直接向 Release(发布) 分支推送代码，技术 Leader 需要在功能分支合并到 Release(发布) 分支之前做好代码审查。这也是通过 <code>pull request</code> 完成的。</p>
-<h3 id="代码冲突"><a href="#代码冲突" class="headerlink" title="代码冲突"></a>代码冲突</h3><p>代码冲突可以说是所有开发人员最痛恨但又最为关键的部分。这需要开发者有很好的工作习惯。举个例子:</p>
-<ol>
-<li><p>Bob 完成了他的编码工作，同时向 <code>release/fb</code> 分支发起了一个 <code>pull request</code>。</p>
+<h3 id="代码冲突"><a href="#代码冲突" class="headerlink" title="代码冲突"></a>代码冲突</h3><ol>
+<li>代码冲突可以说是所有开发人员最痛恨但又最为关键的部分。这需要开发者有很好的工作习惯。举个例子:<ul>
+<li>Bob 完成了他的编码工作，同时向 <code>release/fb</code> 分支发起了一个 <code>pull request</code>。</li>
+<li>因为发布分支已经合并了登录的代码，这时代码冲突发生了。在这样的情况下，作为技术 Leader 就需要解决冲突和合并代码了。</li>
+<li>现在 John 也已经完成了他的开发，同时也想把代码合并到发布分支。但 John 非常擅长于解决代码冲突。他将release/fb<code>上最新的代码合并到他自己的功能分支</code>feature/newsfeed<code>（通过 git pull 或 git merge 命令）。同时他解决了所有存在的冲突，现在</code>feature/newsfeed<code>已经有了所有发布分支</code>release/fb<code>的代码。</code> </li>
+<li><code>最后 John 创建了一个</code>pull request<code>，由于 John 已经解决了所有问题，所以本次</code>pull request` 不会再有冲突了。</li>
+</ul>
 </li>
-<li><p>因为发布分支已经合并了登录的代码，这时代码冲突发生了。在这样的情况下，作为技术 Leader 就需要解决冲突和合并代码了。</p>
-</li>
-<li><p>现在 John 也已经完成了他的开发，同时也想把代码合并到发布分支。但 John 非常擅长于解决代码冲突。他将 <code>release/fb</code> 上最新的代码合并到他自己的功能分支 <code>feature/newsfeed</code> （通过 git pull 或 git merge 命令）。同时他解决了所有存在的冲突，现在 <code>feature/newsfeed</code> 已经有了所有发布分支 <code>release/fb</code> 的代码。</p>
-</li>
-<li><p>最后 John 创建了一个 <code>pull request</code>，由于 John 已经解决了所有问题，所以本次 <code>pull request</code> 不会再有冲突了。</p>
+</ol>
 <p>因此通常有两种方式来解决代码冲突：</p>
 <ul>
 <li><code>pull request</code> 的 reviewer 需要解决所有的代码冲突。</li>
 <li>开发人员需要确保将发布分支的最新代码合并到功能分支，并且解决所有的冲突。</li>
 </ul>
-</li>
-</ol>
 <h1 id="Git的常用指令"><a href="#Git的常用指令" class="headerlink" title="Git的常用指令"></a>Git的常用指令</h1><p><code>git init</code>  这个目录变成Git可以管理的仓库这个目录变成Git可以管理的仓库</p>
 <p><code>git status</code>查看修改</p>
 <p><code>git add</code> 加入缓存</p>
@@ -278,7 +266,7 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/08/22/deploy-vps/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="../../22/deploy-vps/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -444,11 +432,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
             
             <div class="clearfix"></div>
