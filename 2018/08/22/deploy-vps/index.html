@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | Litchi</title>
+  <title>通过githook将hexo部署vps | Litchi</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="�㶫ҩ�ƴ�ѧ16��ѧ��">
-<meta name="keywords" content="���,Python">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Litchi">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="刚开始博客是搭建在 GitHub 上的，但是回到学校后自己买了一个vps服务器搭建ss，如果只是为了翻墙上谷歌查资料又觉得有点浪费，于是尝试通过githook实现自动化部署到vps。虽然成功部署消耗时间不长，但过程中还是遇到了不少坑，于是想写个blog总结一下。">
+<meta name="keywords" content="-随笔">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通过githook将hexo部署vps">
+<meta property="og:url" content="http://yoursite.com/2018/08/22/deploy-vps/index.html">
 <meta property="og:site_name" content="Litchi">
-<meta property="og:description" content="�㶫ҩ�ƴ�ѧ16��ѧ��">
+<meta property="og:description" content="刚开始博客是搭建在 GitHub 上的，但是回到学校后自己买了一个vps服务器搭建ss，如果只是为了翻墙上谷歌查资料又觉得有点浪费，于是尝试通过githook实现自动化部署到vps。虽然成功部署消耗时间不长，但过程中还是遇到了不少坑，于是想写个blog总结一下。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-09-06T13:05:24.488Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Litchi">
-<meta name="twitter:description" content="�㶫ҩ�ƴ�ѧ16��ѧ��">
+<meta name="twitter:title" content="通过githook将hexo部署vps">
+<meta name="twitter:description" content="刚开始博客是搭建在 GitHub 上的，但是回到学校后自己买了一个vps服务器搭建ss，如果只是为了翻墙上谷歌查资料又觉得有点浪费，于是尝试通过githook实现自动化部署到vps。虽然成功部署消耗时间不长，但过程中还是遇到了不少坑，于是想写个blog总结一下。">
   
   
     <link rel="icon" href="/favicon.png">
@@ -146,36 +147,74 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-deploy-vps" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/22/deploy-vps/" class="archive-article-date">
-  	<time datetime="2018-08-22T12:03:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-22</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/22/deploy-vps/">通过githook将hexo部署vps</a>
+    <h1 class="article-title" itemprop="name">
+      通过githook将hexo部署vps
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/08/22/deploy-vps/" class="archive-article-date">
+  	<time datetime="2018-08-22T12:03:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>刚开始博客是搭建在 GitHub 上的，但是回到学校后自己买了一个vps服务器搭建ss，如果只是为了翻墙上谷歌查资料又觉得有点浪费，于是尝试通过githook实现自动化部署到vps。虽然成功部署消耗时间不长，但过程中还是遇到了不少坑，于是想写个blog总结一下。</p>
+<a id="more"></a>
+<hr>
+<h1 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h1><p>  首先介绍一下hexo静态博客引擎，使用node.js编写，官网是这么说的：</p>
+<blockquote>
+<p>A fast, simple &amp; powerful blog framework</p>
+</blockquote>
+<p>意为「快速、简洁且高效的博客框架」，通俗的来说，Hexo 是一个静态博客生成引擎，用户可以使用文本编辑器写作，然后再用 Hexo 生成 Html 文件。</p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><h2 id="安装Git和Node-js"><a href="#安装Git和Node-js" class="headerlink" title="安装Git和Node.js"></a>安装Git和Node.js</h2><p>本地需要安装 <a href="https://git-scm.com/book/zh/v1/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git" target="_blank" rel="noopener">Git</a> 和 <a href="https://nodejs.org/en/download/current/" target="_blank" rel="noopener">Node.js</a>，安装过程参考官方文档，关于 Git 的配置和学习推荐廖雪峰的<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener"> Git 教程</a><br></p>
+<p>Windows上安装 Git for Windows 之后在开始菜单里打开 Git Bash 输入：<br></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git<span class="built_in"> config </span>--global user.name <span class="string">"你的用户名"</span></span><br><span class="line">git<span class="built_in"> config </span>--global user.email <span class="string">"你的电子邮箱"</span></span><br></pre></td></tr></table></figure>
+<p> 生成密钥</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> ~</span><br><span class="line">mkdir <span class="string">.ssh</span></span><br><span class="line"><span class="keyword">cd</span> <span class="string">.ssh</span></span><br><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
+<h2 id="初始化Hexo"><a href="#初始化Hexo" class="headerlink" title="初始化Hexo"></a>初始化Hexo</h2><p>在电脑任意目录新建一个文件夹 blog，进入文件夹，并执行初始化<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir <span class="keyword">blog </span></span><br><span class="line">cd <span class="keyword">blog</span></span><br><span class="line"><span class="keyword">npm </span><span class="keyword">install </span>-g hexo-cli</span><br><span class="line">hexo init</span><br></pre></td></tr></table></figure></p>
+<p>输入：<br><br><code>hexo new post &quot;Hello World&quot;</code></p>
+<p>即可新建一篇文章。文章以.md格式保存在blog目录下的sourse/post,用支持markdown语法编辑器即可写作。<br></p>
+<h2 id="修改主题参数："><a href="#修改主题参数：" class="headerlink" title="修改主题参数："></a>修改主题参数：</h2><p>由于本人使用yilia主题，参考配置：<br><br><code>https://github.com/litten/hexo-theme-yilia</code></p>
+<h2 id="VPS配置"><a href="#VPS配置" class="headerlink" title="VPS配置"></a>VPS配置</h2><p>本人使用Xshell连接vps服务器，服务器是Centos7<br><br>关于服务器的选购，个人推荐还是vultr厂商的性价比较高</p>
+<h2 id="新建用户和授权"><a href="#新建用户和授权" class="headerlink" title="新建用户和授权"></a>新建用户和授权</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">adduser git</span><br><span class="line">passwd git</span><br><span class="line">gpasswd -<span class="selector-tag">a</span> git sudo</span><br></pre></td></tr></table></figure>
+<p>此处本人遇到个坑，需要配置sudoers<br><figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># ls -l /etc/sudoers</span></span><br><span class="line">-r--r----- <span class="number">1</span> root root <span class="number">4251</span> <span class="number">9</span>月  <span class="number">25</span> <span class="number">15</span>:<span class="number">08</span> /etc/sudoers</span><br><span class="line">[root@localhost ~]<span class="comment"># chmod -v u+w /etc/sudoers</span></span><br><span class="line">mode <span class="keyword">of</span> <span class="string">"/etc/sudoers"</span> changed <span class="keyword">from</span> <span class="number">0440</span> (r--r-----) <span class="keyword">to</span> <span class="number">0640</span> (rw-r-----)</span><br></pre></td></tr></table></figure></p>
+<p>然后在sudoers找到以下代码添加新增的用户，然后:wq保存退出<br><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# vim /etc/sudoers</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## Allow root to run <span class="built_in">any</span> commands anywher  </span><br><span class="line">root    <span class="built_in">ALL</span>=(<span class="built_in">ALL</span>)       <span class="built_in">ALL</span>  </span><br><span class="line">git     <span class="built_in">ALL</span>=(<span class="built_in">ALL</span>)       <span class="built_in">ALL</span>  #这个是新增的用户</span><br></pre></td></tr></table></figure></p>
+<h2 id="上传ssh公钥"><a href="#上传ssh公钥" class="headerlink" title="上传ssh公钥"></a>上传ssh公钥</h2><p>在本地打开git.bash 或者cmd<br><code>ssh-copy-id -i ~/.ssh/id_rsa.pub git@服务器ip地址</code></p>
+<h2 id="安装git和nginx"><a href="#安装git和nginx" class="headerlink" title="安装git和nginx"></a>安装git和nginx</h2><p>更新源<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">su</span> git</span><br><span class="line">sudo yum <span class="keyword">update</span></span><br></pre></td></tr></table></figure></p>
+<p>安装</p>
+<p><code>yum install git-core nginx</code></p>
+<p>配置Git<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir hexo.git</span><br><span class="line">cd hexo.git</span><br><span class="line">git init --bare</span><br></pre></td></tr></table></figure></p>
+<p>创建网站目录<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> /<span class="keyword">var</span>/www</span><br><span class="line"><span class="keyword">mkdir</span> hexo</span><br></pre></td></tr></table></figure></p>
+<p>变更权限</p>
+<p><code>chown git:git -R /var/www/hexo</code></p>
+<p>配置 Git Hooks</p>
+<p><code>cd ~/hexo.git/hooks</code></p>
+<p>编辑post-receive文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo vi post-receive</span><br><span class="line"></span><br><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">GIT_REPO=/home/git/hexo.git <span class="comment">#git 仓库</span></span><br><span class="line">TMP_GIT_CLONE=/tmp/hexo</span><br><span class="line">PUBLIC_WWW=/var/www/hexo <span class="comment">#网站目录</span></span><br><span class="line">rm -rf <span class="variable">$&#123;TMP_GIT_CLONE&#125;</span></span><br><span class="line">git <span class="built_in">clone</span> <span class="variable">$GIT_REPO</span> <span class="variable">$TMP_GIT_CLONE</span></span><br><span class="line">rm -rf <span class="variable">$&#123;PUBLIC_WWW&#125;</span>/*</span><br><span class="line">cp -rf <span class="variable">$&#123;TMP_GIT_CLONE&#125;</span>/* <span class="variable">$&#123;PUBLIC_WWW&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>赋予可执行权限：</p>
+<p><code>sudo chmod +x post-receive</code></p>
+<p>配置 Nginx<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/nginx/<span class="keyword">conf</span>.<span class="keyword">d</span>/hexo.<span class="keyword">conf</span></span><br><span class="line"></span><br><span class="line">  server &#123;</span><br><span class="line">  listen         80 ;</span><br><span class="line">  root /<span class="keyword">var</span>/www/hexo;</span><br><span class="line">  server_name blog.yizhilee.com;</span><br><span class="line">  access_log  /<span class="keyword">var</span>/<span class="keyword">log</span>/nginx/hexo_access.<span class="keyword">log</span>;</span><br><span class="line">  error_log   /<span class="keyword">var</span>/<span class="keyword">log</span>/nginx/hexo_error.<span class="keyword">log</span>;</span><br><span class="line">  location ~* ^.+\.(ico|gif|jpg|jpeg|png)$ &#123;</span><br><span class="line">    root /<span class="keyword">var</span>/www/hexo;</span><br><span class="line">    access_log   off;</span><br><span class="line">    expires      1d;</span><br><span class="line">  &#125;</span><br><span class="line">  location ~* ^.+\.(css|js|txt|xml|swf|wav)$ &#123;</span><br><span class="line">    root /<span class="keyword">var</span>/www/hexo;</span><br><span class="line">    access_log   off;</span><br><span class="line">    expires      10m;</span><br><span class="line">  &#125;</span><br><span class="line">  location / &#123;</span><br><span class="line">    root /<span class="keyword">var</span>/www/hexo;<span class="comment">//这里可以改成你的网站目录地址，我将网站放在 `/var/www/hexo`（请记得删除这段中文注释）</span></span><br><span class="line">    <span class="keyword">if</span> (-f <span class="variable">$request_filename</span>) &#123;</span><br><span class="line">    rewrite ^/(.*)$  /<span class="variable">$1</span> <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后重启 Nginx：</p>
+<p><code>sudo service nginx restart</code></p>
+<p>如果有报错可以执行以下命令了解具体错误细节</p>
+<p><code>nginx -t</code></p>
+<h2 id="发布文章"><a href="#发布文章" class="headerlink" title="发布文章"></a>发布文章</h2><p>在本地编辑好文章之后使用 hexo g 生成静态网页，hexo s 在本地预览，hexo d 提交到服务器。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -187,57 +226,68 @@
 		</ul>
 	</div>
 
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/01/git-work/" class="archive-article-date">
-  	<time datetime="2018-08-01T03:56:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-01</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/08/01/git-work/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Git使用整理</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/01/git-work/">Git使用整理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hexo"><span class="toc-number">1.</span> <span class="toc-text">Hexo</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#准备工作"><span class="toc-number">2.</span> <span class="toc-text">准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Git和Node-js"><span class="toc-number">2.1.</span> <span class="toc-text">安装Git和Node.js</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#初始化Hexo"><span class="toc-number">2.2.</span> <span class="toc-text">初始化Hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改主题参数："><span class="toc-number">2.3.</span> <span class="toc-text">修改主题参数：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VPS配置"><span class="toc-number">2.4.</span> <span class="toc-text">VPS配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#新建用户和授权"><span class="toc-number">2.5.</span> <span class="toc-text">新建用户和授权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#上传ssh公钥"><span class="toc-number">2.6.</span> <span class="toc-text">上传ssh公钥</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装git和nginx"><span class="toc-number">2.7.</span> <span class="toc-text">安装git和nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#发布文章"><span class="toc-number">2.8.</span> <span class="toc-text">发布文章</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -260,8 +310,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
