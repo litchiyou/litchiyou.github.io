@@ -17,7 +17,7 @@
 <meta property="og:description" content="在此次实习中因为接触到Git工作流，个人觉得在以后还是必须掌握的技能因此简单整理一下我对Git的了解">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2018/08/01/git-work/git.png">
-<meta property="og:updated_time" content="2019-02-17T01:10:57.606Z">
+<meta property="og:updated_time" content="2019-02-27T04:38:04.970Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git使用整理">
 <meta name="twitter:description" content="在此次实习中因为接触到Git工作流，个人觉得在以后还是必须掌握的技能因此简单整理一下我对Git的了解">
@@ -220,9 +220,10 @@
 <h1 id="Git的常用指令"><a href="#Git的常用指令" class="headerlink" title="Git的常用指令"></a>Git的常用指令</h1><p><code>git init</code>  这个目录变成Git可以管理的仓库这个目录变成Git可以管理的仓库</p>
 <p><code>git status</code>查看修改</p>
 <p><code>git add</code> 加入缓存</p>
-<p><code>git commit</code> 提交到仓库</p>
+<p><code>git commit -m &quot;message&quot;</code> 提交到仓库</p>
 <p><code>git log</code> 查看每次commit上去的文件便于版本回滚</p>
 <p><code>git remote</code> 查看分支</p>
+<p><code>git remote add &quot;https://(github项目地址)&quot;</code> 添加origin</p>
 <p><code>git checkout</code> 切换分支  加参数–file就会舍弃工作区的修改↓</p>
 <p>命令<code>git checkout -- readme.txt</code>意思就是，把readme.txt文件在工作区的修改全部撤销，这里有两种情况：</p>
 <p>一种是readme.txt自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；</p>
@@ -234,6 +235,7 @@
 <p><code>git fetch</code>  拉取远程代码但是没有合并</p>
 <p><code>git merge</code> 解决冲突后将远程代码合并本地</p>
 <p><code>git push</code>  推到远端仓库</p>
+<p>ps：强退命令是git push -u [origin(本地分支)] master(远程分支)] -f</p>
 
       
 
@@ -428,11 +430,7 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">-随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color5">-C语言</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -440,7 +438,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">-C语言</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">-随笔</a>
               </li>
             
             <div class="clearfix"></div>
