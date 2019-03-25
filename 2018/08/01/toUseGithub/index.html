@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2018/9 | Litchi</title>
+  <title>github初使用 | Litchi</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="�㶫ҩ�ƴ�ѧ16��ѧ��">
-<meta name="keywords" content="���,Python">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Litchi">
-<meta property="og:url" content="http://yoursite.com/archives/2018/09/index.html">
+  <meta name="description" content="记录一下github新建项目以及基本指令">
+<meta name="keywords" content="-随笔">
+<meta property="og:type" content="article">
+<meta property="og:title" content="github初使用">
+<meta property="og:url" content="http://yoursite.com/2018/08/01/toUseGithub/index.html">
 <meta property="og:site_name" content="Litchi">
-<meta property="og:description" content="�㶫ҩ�ƴ�ѧ16��ѧ��">
+<meta property="og:description" content="记录一下github新建项目以及基本指令">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-03-25T11:44:02.720Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Litchi">
-<meta name="twitter:description" content="�㶫ҩ�ƴ�ѧ16��ѧ��">
+<meta name="twitter:title" content="github初使用">
+<meta name="twitter:description" content="记录一下github新建项目以及基本指令">
   
   
     <link rel="icon" href="/favicon.png">
@@ -57,9 +58,9 @@
 		<nav class="header-menu">
 			<ul>
 			
-				<li><a href="../../../index.html">主页</a></li>
+				<li><a href="../../../../index.html">主页</a></li>
 	        
-				<li><a href="../../../tags/随笔/">随笔</a></li>
+				<li><a href="../../../../tags/随笔/">随笔</a></li>
 	        
 			</ul>
 		</nav>
@@ -129,9 +130,9 @@
 				<ul style="width: 50%">
 				
 				
-					<li style="width: 50%"><a href="../../../index.html">主页</a></li>
+					<li style="width: 50%"><a href="../../../../index.html">主页</a></li>
 		        
-					<li style="width: 50%"><a href="../../../tags/随笔/">随笔</a></li>
+					<li style="width: 50%"><a href="../../../../tags/随笔/">随笔</a></li>
 		        
 				</ul>
 			</nav>
@@ -146,98 +147,176 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-toUseGithub" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href=".." class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="../../../2018/09/25/python-orm/" class="archive-article-date">
-  	<time datetime="2018-09-25T08:53:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-25</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="../../../2018/09/25/python-orm/">python-orm</a>
+    <h1 class="article-title" itemprop="name">
+      github初使用
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="" class="archive-article-date">
+  	<time datetime="2018-08-01T11:18:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>记录一下github新建项目以及基本指令</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><ol>
+<li><p>首先github注册账号，基本操作不详细说了。</p>
+</li>
+<li><p>建立项目：</p>
+<ul>
+<li>界面右上角有个加号，选择New repository（新建仓库）</li>
+<li>然后修改项目描述，项目名称等等，注意是否添加readme.md（关系到第一次commit提交代码的时候要留意的操作）</li>
+<li>点击确定就已经完成了新建仓库了，接下来我们要本地关联github仓库</li>
+</ul>
+</li>
+<li><p>生成ssh：</p>
+<ul>
+<li><p>cmd输入指令</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">ssh-keygen</span> <span class="selector-tag">-t</span> <span class="selector-tag">rsa</span> <span class="selector-tag">-C</span> “<span class="selector-tag">username</span>@<span class="keyword">example</span>.<span class="keyword">com</span>”</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>接下来会让你选择一个保存生成的key的文件，直接默认回车就好，默认会在C:/users/用户名/.ssh/id_rsa</p>
+<p>那么你会在C：/users/用户/.ssh/id_rsa文件夹下产生id_rsa  id_rsa.pub    known_hosts三个文件</p>
+</li>
+</ul>
+</li>
+<li><p>配置ssh：</p>
+<ul>
+<li>在GitHUB网站上的setting–&gt;SSH and GPG keys–&gt;new SSH Key</li>
+<li>然后Title随便写</li>
+<li>Key填写id_rsa.pub里的内容，最后Add key</li>
+</ul>
+</li>
+<li><p>在本地项目目录进入cmd：</p>
+<ul>
+<li>git init //把这个目录变成Git可以管理的仓库 </li>
+<li>git remote add origin <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>://关联远程仓库 (后面的github地址可以从刚刚在github新建的项目点clone or download可以看到)</li>
+<li>git add . //不但可以跟单一文件，还可以跟通配符，更可以跟目录。一个点就把当前目录下所有未追踪的文件全部add了 </li>
+<li>git commit -m “first commit” //把文件提交到仓库，双引号里为提交说明 </li>
+<li>git push -u origin master //把本地库的所有内容推送到远程库上</li>
+<li>每一次提交代码前都必须要先<strong>git fetch（拉取远程代码但是没有合并）</strong>！！！！然后解决冲突后再<strong>git merge解决冲突后将远程代码合并本地</strong>最后再git push origin [本地的branch]推到远端github</li>
+</ul>
+</li>
+<li><p>git的相关指令与注意事项</p>
+<p><code>git init</code>  这个目录变成Git可以管理的仓库这个目录变成Git可以管理的仓库</p>
+<p><code>git status</code>查看修改</p>
+<p><code>git add</code> 加入缓存</p>
+<p><code>git commit -m &quot;message&quot;</code> 提交到仓库</p>
+<p><code>git log</code> 查看每次commit上去的文件便于版本回滚</p>
+<p><code>git remote</code> 查看分支</p>
+<p><code>git remote add &quot;https://(github项目地址)&quot;</code> 添加origin</p>
+<p><code>git checkout</code> 切换分支  加参数–file就会舍弃工作区的修改↓</p>
+</li>
+</ol>
+<p>   命令<code>git checkout -- readme.txt</code>意思就是，把readme.txt文件在工作区的修改全部撤销，这里有两种情况：</p>
+<p>   一种是readme.txt自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；</p>
+<p>   一种是readme.txt已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。</p>
+<p>   总之，就是让这个文件回到最近一次<code>git commit</code>或<code>git add</code>时的状态。</p>
+<p>   <code>git reset HEAD &lt;file&gt;</code>可以把暂存区的修改撤销掉（unstage）</p>
+<p>   <code>git pull</code>  拉取最新代码但不解决冲突=git fetch + git merge</p>
+<p>   <code>git clone</code>可以把远程仓库的代码拷贝下来</p>
+<p>   <code>git fetch</code>  拉取远程代码但是没有合并</p>
+<p>   <code>git merge</code> 解决冲突后将远程代码合并本地</p>
+<p>   <code>git push</code>  推到远端仓库</p>
+<p>   ps：强退命令是git push -u [origin(本地分支)] master(远程分支)] -f</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">-随笔</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="../../../2018/09/06/c_pointer/" class="archive-article-date">
-  	<time datetime="2018-09-06T02:03:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-06</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="../../22/deploy-vps/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          通过githook将hexo部署vps
+        
+      </div>
+    </a>
+  
+  
+    <a href="../git-work/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Git使用整理</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="../../../2018/09/06/c_pointer/">C语言指针和结构体总结</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">-C语言</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.</span> <span class="toc-text"></span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -260,8 +339,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
