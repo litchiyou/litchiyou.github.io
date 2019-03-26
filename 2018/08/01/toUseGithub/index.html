@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Litchi">
 <meta property="og:description" content="记录一下github新建项目以及基本指令">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-26T03:56:02.026Z">
+<meta property="og:updated_time" content="2019-03-26T04:00:20.264Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="github初使用">
 <meta name="twitter:description" content="记录一下github新建项目以及基本指令">
@@ -169,18 +169,12 @@
       
         <p>记录一下github新建项目以及基本指令</p>
 <a id="more"></a>
-<ol>
-<li><p>首先github注册账号，基本操作不详细说了。</p>
-</li>
-<li><p>建立项目：</p>
-<ul>
+<h3 id="首先github注册账号，基本操作不详细说了。"><a href="#首先github注册账号，基本操作不详细说了。" class="headerlink" title="首先github注册账号，基本操作不详细说了。"></a>首先github注册账号，基本操作不详细说了。</h3><h3 id="建立项目："><a href="#建立项目：" class="headerlink" title="建立项目："></a>建立项目：</h3><ul>
 <li>界面右上角有个加号，选择New repository（新建仓库）</li>
 <li>然后修改项目描述，项目名称等等，注意是否添加readme.md（关系到第一次commit提交代码的时候要留意的操作）</li>
 <li>点击确定就已经完成了新建仓库了，接下来我们要本地关联github仓库</li>
 </ul>
-</li>
-<li><p>生成ssh：</p>
-<ul>
+<h3 id="生成ssh："><a href="#生成ssh：" class="headerlink" title="生成ssh："></a>生成ssh：</h3><ul>
 <li><p>cmd输入指令</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">ssh-keygen</span> <span class="selector-tag">-t</span> <span class="selector-tag">rsa</span> <span class="selector-tag">-C</span> “<span class="selector-tag">username</span>@<span class="keyword">example</span>.<span class="keyword">com</span>”</span><br></pre></td></tr></table></figure>
 </li>
@@ -188,16 +182,12 @@
 <p>那么你会在C：/users/用户/.ssh/id_rsa文件夹下产生id_rsa  id_rsa.pub    known_hosts三个文件</p>
 </li>
 </ul>
-</li>
-<li><p>配置ssh：</p>
-<ul>
+<h3 id="配置ssh："><a href="#配置ssh：" class="headerlink" title="配置ssh："></a>配置ssh：</h3><ul>
 <li>在GitHUB网站上的setting–&gt;SSH and GPG keys–&gt;new SSH Key</li>
 <li>然后Title随便写</li>
 <li>Key填写id_rsa.pub里的内容，最后Add key</li>
 </ul>
-</li>
-<li><p>在本地项目目录进入cmd：</p>
-<ul>
+<h3 id="在本地项目目录进入cmd："><a href="#在本地项目目录进入cmd：" class="headerlink" title="在本地项目目录进入cmd："></a>在本地项目目录进入cmd：</h3><ul>
 <li>git init //把这个目录变成Git可以管理的仓库 </li>
 <li>git remote add origin <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>://关联远程仓库 (后面的github地址可以从刚刚在github新建的项目点clone or download可以看到)</li>
 <li>git add . //不但可以跟单一文件，还可以跟通配符，更可以跟目录。一个点就把当前目录下所有未追踪的文件全部add了 </li>
@@ -205,9 +195,7 @@
 <li>git push -u origin master //把本地库的所有内容推送到远程库上</li>
 <li>每一次提交代码前都必须要先<strong>git fetch（拉取远程代码但是没有合并）</strong>！！！！然后解决冲突后再<strong>git merge解决冲突后将远程代码合并本地</strong>最后再git push origin [本地的branch]推到远端github</li>
 </ul>
-</li>
-<li><p>git的相关指令与注意事项</p>
-<p><code>git init</code>  这个目录变成Git可以管理的仓库这个目录变成Git可以管理的仓库</p>
+<h3 id="git的相关指令与注意事项"><a href="#git的相关指令与注意事项" class="headerlink" title="git的相关指令与注意事项"></a>git的相关指令与注意事项</h3><p><code>git init</code>  这个目录变成Git可以管理的仓库这个目录变成Git可以管理的仓库</p>
 <p><code>git status</code>查看修改</p>
 <p><code>git add</code> 加入缓存</p>
 <p><code>git commit -m &quot;message&quot;</code> 提交到仓库</p>
@@ -215,8 +203,6 @@
 <p><code>git remote</code> 查看分支</p>
 <p><code>git remote add &quot;https://(github项目地址)&quot;</code> 添加origin</p>
 <p><code>git checkout</code> 切换分支  加参数–file就会舍弃工作区的修改↓</p>
-</li>
-</ol>
 <p>   命令<code>git checkout -- readme.txt</code>意思就是，把readme.txt文件在工作区的修改全部撤销，这里有两种情况：</p>
 <p>   一种是readme.txt自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；</p>
 <p>   一种是readme.txt已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。</p>
@@ -298,7 +284,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#首先github注册账号，基本操作不详细说了。"><span class="toc-number">1.</span> <span class="toc-text">首先github注册账号，基本操作不详细说了。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#建立项目："><span class="toc-number">2.</span> <span class="toc-text">建立项目：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生成ssh："><span class="toc-number">3.</span> <span class="toc-text">生成ssh：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置ssh："><span class="toc-number">4.</span> <span class="toc-text">配置ssh：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在本地项目目录进入cmd："><span class="toc-number">5.</span> <span class="toc-text">在本地项目目录进入cmd：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git的相关指令与注意事项"><span class="toc-number">6.</span> <span class="toc-text">git的相关指令与注意事项</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -427,11 +413,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">-随笔</a>
+                <a href="javascript:void(0)" class="js-tag color5">-C语言</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">-C语言</a>
+                <a href="javascript:void(0)" class="js-tag color4">-随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -440,6 +426,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">-Python</a>
               </li>
             
             <div class="clearfix"></div>

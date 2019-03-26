@@ -6,19 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2018/9 | Litchi</title>
+  <title>(转)算法复杂度求解法 | Litchi</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="�㶫ҩ�ƴ�ѧ16��ѧ��">
-<meta name="keywords" content="���,Python">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Litchi">
-<meta property="og:url" content="http://yoursite.com/archives/2018/09/index.html">
+  <meta name="description" content="算法的时间复杂度，是刚开始接触算法和数据结构时的概念，在真正使用的时候有时候常常忘记它的推导公式。最近准备校招，把二叉树、排序、查找等这些经典的算法复习了一遍，这次把这些都整理成博客以便以后查看，复习计划接近尾声，这两天老是不在状态，学习图的时候有点晕乎乎，今天反过头来把时间复杂度的求解法整理一下，还是颇有收获，以前很多地方自己存在着理解误差。希望对大家也有所帮助，有不对的地方还请多指教。">
+<meta name="keywords" content="-随笔">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(转)算法复杂度求解法">
+<meta property="og:url" content="http://yoursite.com/2018/10/25/algorithm-md/index.html">
 <meta property="og:site_name" content="Litchi">
-<meta property="og:description" content="�㶫ҩ�ƴ�ѧ16��ѧ��">
+<meta property="og:description" content="算法的时间复杂度，是刚开始接触算法和数据结构时的概念，在真正使用的时候有时候常常忘记它的推导公式。最近准备校招，把二叉树、排序、查找等这些经典的算法复习了一遍，这次把这些都整理成博客以便以后查看，复习计划接近尾声，这两天老是不在状态，学习图的时候有点晕乎乎，今天反过头来把时间复杂度的求解法整理一下，还是颇有收获，以前很多地方自己存在着理解误差。希望对大家也有所帮助，有不对的地方还请多指教。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://common.cnblogs.com/images/copycode.gif">
+<meta property="og:image" content="https://common.cnblogs.com/images/copycode.gif">
+<meta property="og:image" content="https://common.cnblogs.com/images/copycode.gif">
+<meta property="og:image" content="https://common.cnblogs.com/images/copycode.gif">
+<meta property="og:image" content="https://common.cnblogs.com/images/copycode.gif">
+<meta property="og:image" content="https://common.cnblogs.com/images/copycode.gif">
+<meta property="og:updated_time" content="2019-03-26T04:04:53.284Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Litchi">
-<meta name="twitter:description" content="�㶫ҩ�ƴ�ѧ16��ѧ��">
+<meta name="twitter:title" content="(转)算法复杂度求解法">
+<meta name="twitter:description" content="算法的时间复杂度，是刚开始接触算法和数据结构时的概念，在真正使用的时候有时候常常忘记它的推导公式。最近准备校招，把二叉树、排序、查找等这些经典的算法复习了一遍，这次把这些都整理成博客以便以后查看，复习计划接近尾声，这两天老是不在状态，学习图的时候有点晕乎乎，今天反过头来把时间复杂度的求解法整理一下，还是颇有收获，以前很多地方自己存在着理解误差。希望对大家也有所帮助，有不对的地方还请多指教。">
+<meta name="twitter:image" content="https://common.cnblogs.com/images/copycode.gif">
   
   
     <link rel="icon" href="/favicon.png">
@@ -57,9 +65,9 @@
 		<nav class="header-menu">
 			<ul>
 			
-				<li><a href="../../../index.html">主页</a></li>
+				<li><a href="../../../../index.html">主页</a></li>
 	        
-				<li><a href="../../../tags/随笔/">随笔</a></li>
+				<li><a href="../../../../tags/随笔/">随笔</a></li>
 	        
 			</ul>
 		</nav>
@@ -129,9 +137,9 @@
 				<ul style="width: 50%">
 				
 				
-					<li style="width: 50%"><a href="../../../index.html">主页</a></li>
+					<li style="width: 50%"><a href="../../../../index.html">主页</a></li>
 		        
-					<li style="width: 50%"><a href="../../../tags/随笔/">随笔</a></li>
+					<li style="width: 50%"><a href="../../../../tags/随笔/">随笔</a></li>
 		        
 				</ul>
 			</nav>
@@ -146,98 +154,226 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-algorithm-md" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href=".." class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="../../../2018/09/25/python-orm/" class="archive-article-date">
-  	<time datetime="2018-09-25T08:53:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-25</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="../../../2018/09/25/python-orm/">python-orm</a>
+    <h1 class="article-title" itemprop="name">
+      (转)算法复杂度求解法
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="" class="archive-article-date">
+  	<time datetime="2018-10-25T01:55:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>算法的时间复杂度，是刚开始接触算法和数据结构时的概念，在真正使用的时候有时候常常忘记它的推导公式。最近准备校招，把二叉树、排序、查找等这些经典的算法复习了一遍，这次把这些都整理成博客以便以后查看，复习计划接近尾声，这两天老是不在状态，学习图的时候有点晕乎乎，今天反过头来把时间复杂度的求解法整理一下，还是颇有收获，以前很多地方自己存在着理解误差。希望对大家也有所帮助，有不对的地方还请多指教。</p>
+<a id="more"></a>
+<blockquote>
+<p>在进行算法分析时，语句总的执行次数T(n)是关于问题规模n的函数，进而分析T(n)随n的变化情况并确定T(n)的数量级。算法的时间复杂度，也就是算法的时间量度，基座T（n）=O(f(n))。它表示随问题规模n的增大，算法执行时间的增长率和f(n)的增长率相同，称作算法的渐进算法时间复杂度，简称为时间复杂度。其中f(n)是问题规模n的某个函数。</p>
+</blockquote>
+<p>一般用大写O()来表示算法的时间复杂度写法，通常叫做大O记法。</p>
+<p>一般情况下，随着n的增大，T(n)增长最慢的算法为最优算法。</p>
+<p>O(1)：常数阶</p>
+<p>O(n)：线性阶</p>
+<p>O(n2)：平方阶</p>
+<p><strong>大O推导法：</strong></p>
+<ol>
+<li>用常数1取代运行时间中的所有加法常数</li>
+<li>在修改后的运行函数中，只保留最高阶项</li>
+<li>如果最高阶项存在且不是1，则去除与这个项相乘的常数</li>
+</ol>
+<p><strong>常数阶：</strong></p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> <span class="keyword">sum</span> = <span class="number">0</span> ; n = <span class="number">100</span>;        <span class="comment">/*执行一次*/</span></span><br><span class="line"><span class="keyword">sum</span> = (<span class="number">1</span>+n)*n/<span class="number">2</span>;             <span class="comment">/*执行一次*/</span></span><br><span class="line">printf(<span class="string">"%d"</span>,<span class="keyword">sum</span>);            <span class="comment">/*执行一次*/</span></span><br></pre></td></tr></table></figure>
+<p>这个算法的运行次数f(n) = 3,根据推导大O阶的方法，第一步是将3改为1，在保留最高阶项是，它没有最高阶项，因此这个算法的时间复杂度为O(1);</p>
+<p>另外，</p>
+<p><a href="javascript:void(0" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>;)</p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> <span class="built_in">sum</span> = <span class="number">0</span> ; <span class="built_in">n</span> = <span class="number">100</span>;        /*执行一次*/</span><br><span class="line"><span class="built_in">sum</span> = (<span class="number">1</span>+<span class="built_in">n</span>)*<span class="built_in">n</span>/<span class="number">2</span>;             /*执行第<span class="number">1</span>次*/</span><br><span class="line"><span class="built_in">sum</span> = (<span class="number">1</span>+<span class="built_in">n</span>)*<span class="built_in">n</span>/<span class="number">2</span>;             /*执行第<span class="number">2</span>次*/</span><br><span class="line"><span class="built_in">sum</span> = (<span class="number">1</span>+<span class="built_in">n</span>)*<span class="built_in">n</span>/<span class="number">2</span>;             /*执行第<span class="number">3</span>次*/</span><br><span class="line"><span class="built_in">sum</span> = (<span class="number">1</span>+<span class="built_in">n</span>)*<span class="built_in">n</span>/<span class="number">2</span>;             /*执行第<span class="number">4</span>次*/</span><br><span class="line"><span class="built_in">sum</span> = (<span class="number">1</span>+<span class="built_in">n</span>)*<span class="built_in">n</span>/<span class="number">2</span>;             /*执行第<span class="number">5</span>次*/</span><br><span class="line"><span class="built_in">sum</span> = (<span class="number">1</span>+<span class="built_in">n</span>)*<span class="built_in">n</span>/<span class="number">2</span>;             /*执行第<span class="number">6</span>次*/</span><br><span class="line"><span class="built_in">sum</span> = (<span class="number">1</span>+<span class="built_in">n</span>)*<span class="built_in">n</span>/<span class="number">2</span>;             /*执行第<span class="number">7</span>次*/</span><br><span class="line"><span class="built_in">sum</span> = (<span class="number">1</span>+<span class="built_in">n</span>)*<span class="built_in">n</span>/<span class="number">2</span>;             /*执行第<span class="number">8</span>次*/</span><br><span class="line"><span class="built_in">sum</span> = (<span class="number">1</span>+<span class="built_in">n</span>)*<span class="built_in">n</span>/<span class="number">2</span>;             /*执行第<span class="number">9</span>次*/</span><br><span class="line"><span class="built_in">sum</span> = (<span class="number">1</span>+<span class="built_in">n</span>)*<span class="built_in">n</span>/<span class="number">2</span>;             /*执行第<span class="number">10</span>次*/</span><br><span class="line">printf(<span class="string">"%d"</span>,<span class="built_in">sum</span>);            /*执行一次*/</span><br></pre></td></tr></table></figure>
+<p><a href="javascript:void(0" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>;)</p>
+<p>上面的两段代码中，其实无论n有多少个，本质是是3次和12次的执行差异。这种与问题的大小无关，执行时间恒定的算法，成为具有O(1)的时间复杂度，又叫做常数阶。</p>
+<p>注意：不管这个常数是多少，3或12，都不能写成O(3)、O(12)，而都要写成O(1)</p>
+<p>此外，对于分支结构而言，无论真假执行的次数都是恒定不变的，不会随着n的变大而发生变化，所以单纯的分支结构（不在循环结构中），其时间复杂度也是O(1)。</p>
+<p><strong>线性阶：</strong></p>
+<p>线性阶的循环结构会复杂一些，要确定某个算法的阶次，需要确定特定语句或某个语句集运行的次数。因此要分析算法的复杂度，关键是要分析循环结构的运行情况。</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int <span class="built_in">i</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="built_in">i</span> = <span class="number">0</span> ; <span class="built_in">i</span> &lt; n ; <span class="built_in">i</span>++)&#123;</span><br><span class="line">  /*时间复杂度为O(<span class="number">1</span>)的程序*/      </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>对数阶：</strong></p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> <span class="keyword">count</span> = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span>(<span class="keyword">count</span> &lt; n)&#123;</span><br><span class="line">  <span class="keyword">count</span> = <span class="keyword">count</span> * <span class="number">2</span>;</span><br><span class="line">  <span class="comment">/*时间复杂度为O(1)的程序*/</span>    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因为每次count*2后，距离结束循环更近了。也就是说有多少个2 相乘后大于n，退出循环。</p>
+<p>数学公式：2x = n    –&gt;     x = log2n</p>
+<p>因此这个循环的时间复杂度为O(logn)</p>
+<p><strong>平方阶：</strong></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int <span class="built_in">i</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="built_in">i</span> = <span class="number">0</span> ; <span class="built_in">i</span> &lt; n ; <span class="built_in">i</span>++)&#123;</span><br><span class="line">   for(j = <span class="number">0</span> ; j &lt; n ; j++)&#123;</span><br><span class="line">    /*时间复杂度为O(<span class="number">1</span>)的程序*/  </span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的程序中，对于对于内层循环，它的时间复杂度为O(n)，但是它是包含在外层循环中，再循环n次，因此这段代码的时间复杂度为O(n2)。</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int <span class="built_in">i</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="built_in">i</span> = <span class="number">0</span> ; <span class="built_in">i</span> &lt; n ; <span class="built_in">i</span>++)&#123;</span><br><span class="line">   for(j = <span class="number">0</span> ; j &lt; m ; j++)&#123;</span><br><span class="line">    /*时间复杂度为O(<span class="number">1</span>)的程序*/  </span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是，如果内层循环改成了m次，时间复杂度就为O(n*m)</p>
+<p>再来看一段程序：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int <span class="built_in">i</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="built_in">i</span> = <span class="number">0</span> ; <span class="built_in">i</span> &lt; n ; <span class="built_in">i</span>++)&#123;</span><br><span class="line">   for(j = i ; j &lt; n ; j++)&#123;</span><br><span class="line">    /*时间复杂度为O(<span class="number">1</span>)的程序*/  </span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意：上面的内层循环j = i ;而不是0</p>
+<p>因为i = 0时，内层循环执行了n次，当i=1时，执行了n-1次……当i=n-1时，执行了1次，所以总的执行次数为：</p>
+<p>n+(n-1)+(n-1)+…+1 = n(n+1)/2  =  n2/2 + n/2</p>
+<p>根据大O推导方法，保留最高阶项，n2/2 ，然后去掉这个项相乘的常数，1/2</p>
+<p>因此，这段代码的时间复杂度为O(n2)</p>
+<p>下面，分析调用函数时的时间复杂度计算方法：</p>
+<p>首先，看一段代码：</p>
+<p><a href="javascript:void(0" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>;)</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">int <span class="built_in">i</span>,<span class="built_in">j</span>;</span><br><span class="line"></span><br><span class="line">void <span class="function"><span class="keyword">function</span><span class="params">(int count)</span>&#123;</span></span><br><span class="line">  print(count);  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="built_in">i</span> = <span class="number">0</span> ; <span class="built_in">i</span> &lt; n ; <span class="built_in">i</span>++)&#123;</span><br><span class="line">  function (i)  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="javascript:void(0" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>;)</p>
+<p>函数的时间复杂度是O(1)，因此整体的时间复杂度为O(n)。</p>
+<p>假如function是这样的：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">void <span class="function"><span class="keyword">function</span><span class="params">(int count)</span>&#123;</span></span><br><span class="line">  int <span class="built_in">j</span>;</span><br><span class="line">  <span class="keyword">for</span>(<span class="built_in">j</span> = count ; <span class="built_in">j</span> &lt; n ;<span class="built_in">j</span>++)&#123;</span><br><span class="line">        /*时间复杂度为O(<span class="number">1</span>)的程序*/</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>和第一个的不同之处在于把嵌套内循环放到了函数中，因此最终的时间复杂度为O(n2)</p>
+<p>再来看一个比价复杂的语句:</p>
+<p><a href="javascript:void(0" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>;)</p>
+<figure class="highlight zephir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">n++;                                      <span class="comment">/*执行次数为1*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span><span class="params">(n)</span></span>;                              <span class="comment">/*执行次数为n*/</span></span><br><span class="line"><span class="keyword">int</span> i,j;</span><br><span class="line"><span class="keyword">for</span>(i = <span class="number">0</span> ; i &lt; n ; i++)&#123;                 <span class="comment">/*执行次数为nXn*/</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span><span class="params">(i)</span></span>;  </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>(i = <span class="number">0</span> ; i &lt; n ; i++)&#123;                <span class="comment">/*执行次数为n(n+1)/2*/</span></span><br><span class="line">  <span class="keyword">for</span>(j = i ; j &lt; n ; j++)&#123;</span><br><span class="line">      <span class="comment">/*时间复杂度为O(1)的程序*/</span>  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="javascript:void(0" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>;)</p>
+<p>它的执行次数f(n) = 1 + n + n2 + n(n+1)/2 + 3/2n2+3/2 n+1,</p>
+<p>根据推导大O阶的方法，最终它的时间复杂度为：O(n2)</p>
+<p><strong>常见的时间复杂度：</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>执行次数函数</strong></th>
+<th><strong>阶</strong></th>
+<th><strong>术语描述</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>12</td>
+<td>O(1)</td>
+<td>常数阶</td>
+</tr>
+<tr>
+<td>2n+3</td>
+<td>O(n)</td>
+<td>线性阶</td>
+</tr>
+<tr>
+<td>3n2+2n+1</td>
+<td>O(n2)</td>
+<td>平方阶</td>
+</tr>
+<tr>
+<td>5log2n+20</td>
+<td>O(log2n)</td>
+<td>对数阶</td>
+</tr>
+<tr>
+<td>2n+3nlog2n+19</td>
+<td>O(nlogn)</td>
+<td>nlog2n阶</td>
+</tr>
+<tr>
+<td>6n3+2n2+3n+4</td>
+<td>O(n3)</td>
+<td>立方阶</td>
+</tr>
+<tr>
+<td>2n</td>
+<td>O(2n)</td>
+<td>指数阶</td>
+</tr>
+</tbody>
+</table>
+<p>时间复杂度所耗费的时间是：</p>
+<p>O(1) &lt; O(logn) &lt; O(n) &lt; O(nlogn) &lt; O(n2) &lt; O(n3) &lt;O(2n) &lt; O(n!) &lt;O(nn)</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">-随笔</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="../../../2018/09/06/c_pointer/" class="archive-article-date">
-  	<time datetime="2018-09-06T02:03:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-06</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="../../../../2019/03/26/python/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          python(学习笔记)
+        
+      </div>
+    </a>
+  
+  
+    <a href="../../../09/25/python-orm/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">python-orm</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="../../../2018/09/06/c_pointer/">C语言指针和结构体总结</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">-C语言</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -260,8 +396,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
