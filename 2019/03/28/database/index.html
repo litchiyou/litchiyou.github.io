@@ -18,7 +18,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2019/03/28/database/2NF.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/28/database/2NF2.png">
-<meta property="og:updated_time" content="2019-03-28T07:55:44.198Z">
+<meta property="og:updated_time" content="2019-04-05T02:00:59.467Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库设计总结">
 <meta name="twitter:description" content="近期进行的web项目开发时遇到一些数据库设计问题，及时总结一下因为已经忘记了之前大部分数据库设计的一些模式，经常要翻书真的不方便。以下是总结：">
@@ -195,6 +195,17 @@
 <p><img src="/2019/03/28/database/./2NF2.png" alt="1553759463321"></p>
 <p><strong>第三范式（3NF）</strong>：满足第二范式，若R中不存在一个码X，属性组Y及非主属性Z，使得X决定了Y，Y决定Z成立，且Y不决定X，则称R满足第三范式。（栗子如上图，SC是属于第三范式的，S-L关系就不属于了，因为存在传递函数依赖）</p>
 <p><strong>BCNF</strong>：（相比下容易理解一点点），在R中，如果X→Y，且Y不属于X里面的时候，X必含有码。即如果R中每一个决定因素都包含码，则R是属于BCNF。</p>
+<h3 id="关系型数据库遵循ACID规则（事务的四特性）"><a href="#关系型数据库遵循ACID规则（事务的四特性）" class="headerlink" title="关系型数据库遵循ACID规则（事务的四特性）"></a>关系型数据库遵循ACID规则（事务的四特性）</h3><p><strong>1、A (Atomicity) 原子性</strong></p>
+<p>原子性很容易理解，也就是说事务里的所有操作要么全部做完，要么都不做，事务成功的条件是事务里的所有操作都成功，只要有一个操作失败，整个事务就失败，需要回滚。</p>
+<p>比如银行转账，从A账户转100元至B账户，分为两个步骤：1）从A账户取100元；2）存入100元至B账户。这两步要么一起完成，要么一起不完成，如果只完成第一步，第二步失败，钱会莫名其妙少了100元。</p>
+<p><strong>2、C (Consistency) 一致性</strong></p>
+<p>一致性也比较容易理解，也就是说数据库要一直处于一致的状态，事务的运行不会改变数据库原本的一致性约束。</p>
+<p>例如现有完整性约束a+b=10，如果一个事务改变了a，那么必须得改变b，使得事务结束后依然满足a+b=10，否则事务失败。</p>
+<p><strong>3、I (Isolation) 独立性</strong></p>
+<p>所谓的独立性是指并发的事务之间不会互相影响，如果一个事务要访问的数据正在被另外一个事务修改，只要另外一个事务未提交，它所访问的数据就不受未提交事务的影响。</p>
+<p>比如现在有个交易是从A账户转100元至B账户，在这个交易还未完成的情况下，如果此时B查询自己的账户，是看不到新增加的100元的。</p>
+<p><strong>4、D (Durability) 持久性</strong></p>
+<p>持久性是指一旦事务提交后，它所做的修改将会永久的保存在数据库上，即使出现宕机也不会丢失。</p>
 
       
 
@@ -265,7 +276,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#关系数据理论："><span class="toc-number">1.</span> <span class="toc-text">关系数据理论：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#函数依赖："><span class="toc-number">1.1.</span> <span class="toc-text">函数依赖：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#规范化："><span class="toc-number">1.2.</span> <span class="toc-text">规范化：</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#关系数据理论："><span class="toc-number">1.</span> <span class="toc-text">关系数据理论：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#函数依赖："><span class="toc-number">1.1.</span> <span class="toc-text">函数依赖：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#规范化："><span class="toc-number">1.2.</span> <span class="toc-text">规范化：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关系型数据库遵循ACID规则（事务的四特性）"><span class="toc-number">1.3.</span> <span class="toc-text">关系型数据库遵循ACID规则（事务的四特性）</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -406,11 +417,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color3">-Python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">-Python</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
             
             <div class="clearfix"></div>
@@ -461,7 +472,7 @@ MathJax.Hub.Queue(function() {
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">Litchi&lt;br&gt;目前为广东药科大学一名大三学生&lt;br&gt;热爱篮球&lt;br&gt;Hustle everyday every night</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">Litchi&lt;br&gt;目前为广东药科大学一名大三学生&lt;br&gt;热爱篮球&lt;br&gt;Lift is short.You need Python.</div>
   	  	
     	</section>
     
