@@ -18,7 +18,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2019/03/28/database/2NF.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/28/database/2NF2.png">
-<meta property="og:updated_time" content="2019-04-05T02:00:59.467Z">
+<meta property="og:updated_time" content="2019-04-06T17:45:31.484Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库设计总结">
 <meta name="twitter:description" content="近期进行的web项目开发时遇到一些数据库设计问题，及时总结一下因为已经忘记了之前大部分数据库设计的一些模式，经常要翻书真的不方便。以下是总结：">
@@ -206,6 +206,32 @@
 <p>比如现在有个交易是从A账户转100元至B账户，在这个交易还未完成的情况下，如果此时B查询自己的账户，是看不到新增加的100元的。</p>
 <p><strong>4、D (Durability) 持久性</strong></p>
 <p>持久性是指一旦事务提交后，它所做的修改将会永久的保存在数据库上，即使出现宕机也不会丢失。</p>
+<h3 id="关系数据库的四种事务隔离级别"><a href="#关系数据库的四种事务隔离级别" class="headerlink" title="关系数据库的四种事务隔离级别"></a>关系数据库的四种事务隔离级别</h3><h4 id="事务的并发问题"><a href="#事务的并发问题" class="headerlink" title="事务的并发问题"></a><strong>事务的并发问题</strong></h4><p>1、脏读：事务A读取了事务B更新的数据，然后B回滚操作，那么A读取到的数据是脏数据</p>
+<p>2、不可重复读：事务 A 多次读取同一数据，事务 B 在事务A多次读取的过程中，对数据作了更新并提交，导致事务A多次读取同一数据时，结果 不一致。</p>
+<p>3、幻读：系统管理员A将数据库中所有学生的成绩从具体分数改为ABCDE等级，但是系统管理员B就在这个时候插入了一条具体分数的记录，当系统管理员A改结束后发现还有一条记录没有改过来，就好像发生了幻觉一样，这就叫幻读。</p>
+<p>　　小结：不可重复读的和幻读很容易混淆，不可重复读侧重于修改，幻读侧重于新增或删除。解决不可重复读的问题只需锁住满足条件的行，解决幻读需要锁表</p>
+<h4 id="四种事务隔离级别分别是："><a href="#四种事务隔离级别分别是：" class="headerlink" title="四种事务隔离级别分别是："></a>四种事务隔离级别分别是：</h4><p>未提交读：允许脏读、不可重复读、幻读</p>
+<p>不可重复读：不允许脏读。其它允许</p>
+<p>可重复读：允许幻读。其它不允许</p>
+<p>串行读：都不允许</p>
+<h3 id="数据库的概念模型设计"><a href="#数据库的概念模型设计" class="headerlink" title="数据库的概念模型设计"></a>数据库的概念模型设计</h3><p>即根据实际生活需求分析建立ER图。每个实体都有唯一标识的属性，称为码。其他属性叫候选码。</p>
+<h3 id="数据库物理模型设计"><a href="#数据库物理模型设计" class="headerlink" title="数据库物理模型设计"></a>数据库物理模型设计</h3><p>即ER图根据1对1或者1对多或多对多转换成关系模式。</p>
+<h4 id="一对一"><a href="#一对一" class="headerlink" title="一对一"></a>一对一</h4><p>1:1联系可以转换成一个独立的关系模式。也可以与相连的任意一端对应的关系模式合并。</p>
+<p>栗子：班级只有一个班主任，一个班主任只管理一个班。那么转换关系模式可以是管理（<u>班级号</u>、职工号）或者管理（<u>职工号</u>、班级号）。关系模式合并就可以是班级（<u>班级号</u>、学生人数、<strong>职工号</strong>）或者班主任（<u>职工号</u>、<strong>班级号</strong>）</p>
+<h4 id="一对多"><a href="#一对多" class="headerlink" title="一对多"></a>一对多</h4><p>1:n联系可以转换成一个独立的关系模式。也可以与连接N一端对应的关系模式合并。</p>
+<p>栗子：班级有多名学生，一个学生只能在一个班。那么转换关系模式可以是组成（<u>学号</u>、班级号）。关系模式合并就可以是学生（<u>学号</u>、姓名、<strong>班级号</strong>）。</p>
+<h4 id="多对多"><a href="#多对多" class="headerlink" title="多对多"></a>多对多</h4><p>n:n联系只能转换成一个独立的关系模式。即将联系当成一个关系模式。</p>
+<h2 id="常用的一些SQL语句："><a href="#常用的一些SQL语句：" class="headerlink" title="常用的一些SQL语句："></a>常用的一些SQL语句：</h2><h3 id="分组查询：Group-By"><a href="#分组查询：Group-By" class="headerlink" title="分组查询：Group By"></a>分组查询：Group By</h3><h3 id="复杂连接查询：left-join（左连接）、right-join（右连接）、inner-join（内连接）"><a href="#复杂连接查询：left-join（左连接）、right-join（右连接）、inner-join（内连接）" class="headerlink" title="复杂连接查询：left join（左连接）、right join（右连接）、inner join（内连接）"></a>复杂连接查询：left join（左连接）、right join（右连接）、inner join（内连接）</h3><p>1、内连接（INNER JOIN）使用比较运算符进行表间列数据的比较操作，并列出这些表中与连接条件相匹配的数据行，组合成新的记录。</p>
+<p>2、LEFT JOIN（左连接），即<code>LEFT OUTER JOIN</code>，返回左表的全部记录，即使右表中没有对应匹配记录。</p>
+<p>3、RIGHT JOIN（右连接），即<code>RIGHT OUTER JOIN</code>，返回右表的全部记录，即使左表中没有对应匹配记录。</p>
+<h3 id="嵌套查询：select-from-where"><a href="#嵌套查询：select-from-where" class="headerlink" title="嵌套查询：select-from-where"></a>嵌套查询：select-from-where</h3><p>栗子：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> Sname  <span class="comment">/*外层查询或父查询*/</span></span><br><span class="line"><span class="keyword">FROM</span> Student</span><br><span class="line"><span class="keyword">WHERE</span> Sno <span class="keyword">IN</span></span><br><span class="line">    (<span class="keyword">SELECT</span> Sno  <span class="comment">/*内层查询或子查询*/</span></span><br><span class="line">     <span class="keyword">FROM</span> SC</span><br><span class="line">     <span class="keyword">WHERE</span> Cno=<span class="string">'2'</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="查询结果排序：Order-By"><a href="#查询结果排序：Order-By" class="headerlink" title="查询结果排序：Order  By"></a>查询结果排序：Order  By</h3><blockquote>
+<p>SELECT &lt;列名列表&gt; FROM &lt;表名&gt;</p>
+<p>[WHERE 条件]</p>
+<p>ORDER BY &lt;字段名1&gt; [ASC|DESC][ ,字段名2 [ASC|DESC] ] [,…n]</p>
+<p>–order by &lt;字段名1&gt; (不写ASC|DESC, 则默认升序ASC)</p>
+</blockquote>
 
       
 
@@ -276,7 +302,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#关系数据理论："><span class="toc-number">1.</span> <span class="toc-text">关系数据理论：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#函数依赖："><span class="toc-number">1.1.</span> <span class="toc-text">函数依赖：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#规范化："><span class="toc-number">1.2.</span> <span class="toc-text">规范化：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关系型数据库遵循ACID规则（事务的四特性）"><span class="toc-number">1.3.</span> <span class="toc-text">关系型数据库遵循ACID规则（事务的四特性）</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#关系数据理论："><span class="toc-number">1.</span> <span class="toc-text">关系数据理论：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#函数依赖："><span class="toc-number">1.1.</span> <span class="toc-text">函数依赖：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#规范化："><span class="toc-number">1.2.</span> <span class="toc-text">规范化：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关系型数据库遵循ACID规则（事务的四特性）"><span class="toc-number">1.3.</span> <span class="toc-text">关系型数据库遵循ACID规则（事务的四特性）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关系数据库的四种事务隔离级别"><span class="toc-number">1.4.</span> <span class="toc-text">关系数据库的四种事务隔离级别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#事务的并发问题"><span class="toc-number">1.4.1.</span> <span class="toc-text">事务的并发问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#四种事务隔离级别分别是："><span class="toc-number">1.4.2.</span> <span class="toc-text">四种事务隔离级别分别是：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据库的概念模型设计"><span class="toc-number">1.5.</span> <span class="toc-text">数据库的概念模型设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据库物理模型设计"><span class="toc-number">1.6.</span> <span class="toc-text">数据库物理模型设计</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一对一"><span class="toc-number">1.6.1.</span> <span class="toc-text">一对一</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#一对多"><span class="toc-number">1.6.2.</span> <span class="toc-text">一对多</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#多对多"><span class="toc-number">1.6.3.</span> <span class="toc-text">多对多</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用的一些SQL语句："><span class="toc-number">2.</span> <span class="toc-text">常用的一些SQL语句：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分组查询：Group-By"><span class="toc-number">2.1.</span> <span class="toc-text">分组查询：Group By</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复杂连接查询：left-join（左连接）、right-join（右连接）、inner-join（内连接）"><span class="toc-number">2.2.</span> <span class="toc-text">复杂连接查询：left join（左连接）、right join（右连接）、inner join（内连接）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#嵌套查询：select-from-where"><span class="toc-number">2.3.</span> <span class="toc-text">嵌套查询：select-from-where</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查询结果排序：Order-By"><span class="toc-number">2.4.</span> <span class="toc-text">查询结果排序：Order  By</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -417,11 +443,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">-Python</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color3">-Python</a>
               </li>
             
             <div class="clearfix"></div>
