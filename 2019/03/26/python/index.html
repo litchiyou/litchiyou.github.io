@@ -9,14 +9,14 @@
   <title>python(学习笔记) | Litchi</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="记录一下python中遇到过的问题以及刷题遇到的问题">
-<meta name="keywords" content="-Python">
+<meta name="keywords" content="-python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python(学习笔记)">
 <meta property="og:url" content="http://yoursite.com/2019/03/26/python/index.html">
 <meta property="og:site_name" content="Litchi">
 <meta property="og:description" content="记录一下python中遇到过的问题以及刷题遇到的问题">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-26T04:29:14.125Z">
+<meta property="og:updated_time" content="2019-07-01T01:00:50.769Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python(学习笔记)">
 <meta name="twitter:description" content="记录一下python中遇到过的问题以及刷题遇到的问题">
@@ -169,7 +169,7 @@
       
         <p>记录一下python中遇到过的问题以及刷题遇到的问题</p>
 <a id="more"></a>
-<h3 id="浅复制和深复制问题："><a href="#浅复制和深复制问题：" class="headerlink" title="浅复制和深复制问题："></a>浅复制和深复制问题：</h3><p>下面代码运行后，a、b、c、d四个变量的值，描述错误的是？<br>import copy<br>a = [1, 2, 3, 4, [‘a’, ‘b’]]<br>b = a<br>c = copy.copy(a)<br>d = copy.deepcopy(a)<br>a.append(5)<br>a[4].append(‘c’) </p>
+<h2 id="浅复制和深复制问题："><a href="#浅复制和深复制问题：" class="headerlink" title="浅复制和深复制问题："></a>浅复制和深复制问题：</h2><p>下面代码运行后，a、b、c、d四个变量的值，描述错误的是？<br>import copy<br>a = [1, 2, 3, 4, [‘a’, ‘b’]]<br>b = a<br>c = copy.copy(a)<br>d = copy.deepcopy(a)<br>a.append(5)<br>a[4].append(‘c’) </p>
 <blockquote>
 <p>import copy</p>
 <p>a = [1, 2, 3, 4, [‘a’, ‘b’]] </p>
@@ -183,22 +183,24 @@
 <p>c=[1, 2, 3, 4, [‘a’, ‘b’,’c’]] </p>
 <p>d=[1, 2, 3, 4, [‘a’, ‘b’]] </p>
 </blockquote>
-<h3 id="映射类型："><a href="#映射类型：" class="headerlink" title="映射类型："></a>映射类型：</h3><p>下列哪种类型是Python的映射类型？</p>
+<h2 id="映射类型："><a href="#映射类型：" class="headerlink" title="映射类型："></a>映射类型：</h2><p>下列哪种类型是Python的映射类型？</p>
 <p>str        list        tuple        tuple</p>
 <blockquote>
 <p>字典是 Python 语言中唯一的映射类型。</p>
 </blockquote>
-<h3 id="装饰器问题："><a href="#装饰器问题：" class="headerlink" title="装饰器问题："></a>装饰器问题：</h3><p>有如下函数定义，执行结果正确的是？ </p>
+<h2 id="装饰器问题："><a href="#装饰器问题：" class="headerlink" title="装饰器问题："></a>装饰器问题：</h2><p>有如下函数定义，执行结果正确的是？ </p>
 <p> def dec(f):</p>
 <pre><code>n = 3
 
 def wrapper(*args,**kw):
-</code></pre><p>​         return f(<em>args,**kw) </em> n</p>
-<pre><code>return wrapper
+
+    return f(*args,**kw) * n
+
+return wrapper
 </code></pre><p> @dec</p>
 <p> def foo(n):</p>
-<p>​     return n * 2</p>
-<p>A.foo(2) == 12</p>
+<pre><code>return n * 2
+</code></pre><p>A.foo(2) == 12</p>
 <p>B.foo(3) == 12</p>
 <p>C.foo(2) == 6</p>
 <p>D.foo(3) == 6</p>
@@ -206,12 +208,12 @@ def wrapper(*args,**kw):
 <p>装饰器本身是一个函数，目的是在不改变待装饰函数代码的情况下，增加额外的功能，装饰器返回的函数对象</p>
 <p>如题：@dec的作用是把原foo函数（待装饰函数）给dec函数（装饰器），然后将返回值wrapper函数（已装饰函数）重新赋值给foo函数，因此，foo(2)语句实际执行情况是：</p>
 <p>def wrapper(2):</p>
-<p>​    return foo(2) * 3</p>
-</blockquote>
-<h3 id="try-except-finally处理机制："><a href="#try-except-finally处理机制：" class="headerlink" title="try;except;finally处理机制："></a>try;except;finally处理机制：</h3><blockquote>
+<pre><code>return foo(2) * 3
+</code></pre></blockquote>
+<h2 id="try-except-finally处理机制："><a href="#try-except-finally处理机制：" class="headerlink" title="try;except;finally处理机制："></a>try;except;finally处理机制：</h2><blockquote>
 <p>try:的语句出现异常才会执行except后的语句，如果正常，则执行完try后执行else。另外，finally语句不管有无异常都会执行。</p>
 </blockquote>
-<h3 id="new和init的区别"><a href="#new和init的区别" class="headerlink" title="new和init的区别"></a><strong>new</strong>和<strong>init</strong>的区别</h3><blockquote>
+<h2 id="new和init的区别"><a href="#new和init的区别" class="headerlink" title="new和init的区别"></a><strong>new</strong>和<strong>init</strong>的区别</h2><blockquote>
 <p>根据官方文档： </p>
 <ul>
 <li><strong>init</strong>是当实例对象创建完成后被调用的，然后设置对象属性的一些初始值。      </li>
@@ -220,7 +222,7 @@ def wrapper(*args,**kw):
 </li>
 </ul>
 </blockquote>
-<h3 id="编码顺序："><a href="#编码顺序：" class="headerlink" title="编码顺序："></a>编码顺序：</h3><p>有一段python的编码程序如下：urllib.quote(line.decode(“gbk”).encode(“utf-16”)),请问经过该编码的字符串的解码顺序是（ ） </p>
+<h2 id="编码顺序："><a href="#编码顺序：" class="headerlink" title="编码顺序："></a>编码顺序：</h2><p>有一段python的编码程序如下：urllib.quote(line.decode(“gbk”).encode(“utf-16”)),请问经过该编码的字符串的解码顺序是（ ） </p>
 <p>A、gbk    utf16    url解码</p>
 <p>B、gbk       url解码     utf16</p>
 <p>C、url解码  gbk    utf16</p>
@@ -232,7 +234,7 @@ def wrapper(*args,**kw):
 <p>  line应该是字节，先以<strong>gbk**</strong>解码<strong>，再以</strong>utf-16编码<strong>，再进行</strong>quote编码。**  </p>
 <p>  <strong>额外说一点，一般是用什么格式编码，就用什么格式解码，除非用编码进行加密，否则没有必要这样。</strong></p>
 </blockquote>
-<h3 id="下划线定义函数时应该注意："><a href="#下划线定义函数时应该注意：" class="headerlink" title="下划线定义函数时应该注意："></a>下划线定义函数时应该注意：</h3><p>Python中单下划线_foo与双下划线<strong>foo与</strong>foo__的成员，下列说法正确的是？</p>
+<h2 id="下划线定义函数时应该注意："><a href="#下划线定义函数时应该注意：" class="headerlink" title="下划线定义函数时应该注意："></a>下划线定义函数时应该注意：</h2><p>Python中单下划线_foo与双下划线<strong>foo与</strong>foo__的成员，下列说法正确的是？</p>
 <p>A._foo 不能直接用于’from module import *’</p>
 <p>B._  _foo解析器用_classname__foo来代替这个名字，以区别和其他类相同的命名</p>
 <p>C._ _ foo _ _代表python里特殊方法专用的标识</p>
@@ -251,11 +253,12 @@ def wrapper(*args,**kw):
 
   _classname__methodname。  
 </code></pre><p>  3、_ _ object  #全私有，全保护  </p>
-<p>​                         #私有成员“private”，意思是只有类对象自己能访问，连子类对象也不能访 </p>
-<pre><code>问到这个数据，不能用’from module import *’导入。  
+<pre><code>\#私有成员“private”，意思是只有类对象自己能访问，连子类对象也不能访 
+
+   问到这个数据，不能用’from module import *’导入。  
 </code></pre><p>  4、_ _ object_ _     #<strong>内建方法，用户不要这样定义</strong></p>
 </blockquote>
-<h3 id="元组（tuple）的定义方式："><a href="#元组（tuple）的定义方式：" class="headerlink" title="元组（tuple）的定义方式："></a>元组（tuple）的定义方式：</h3><p>下列哪种不是Python元组的定义方式？ </p>
+<h2 id="元组（tuple）的定义方式："><a href="#元组（tuple）的定义方式：" class="headerlink" title="元组（tuple）的定义方式："></a>元组（tuple）的定义方式：</h2><p>下列哪种不是Python元组的定义方式？ </p>
 <p>A.(1)        B.(1, )        C.(1, 2)        D.(1, 2, (3, 4))</p>
 <blockquote>
 <p>Python 中的 tuple 结构为 <strong>“不可变序列”</strong>，用小括号表示。为了区别数学中表示优先级的小括号，当 tuple 中只含一个元素时，需要在元素后加上逗号。<br> 详情可参考文档中的解释： </p>
@@ -263,6 +266,13 @@ def wrapper(*args,**kw):
 <li><strong>Using a trailing comma for a singleton tuple:a,or(a,)</strong></li>
 </ul>
 </blockquote>
+<h2 id="python的read-、readline-、readlines-、xreadlines"><a href="#python的read-、readline-、readlines-、xreadlines" class="headerlink" title="python的read() 、readline()、readlines()、xreadlines()"></a>python的read() 、readline()、readlines()、xreadlines()</h2><ul>
+<li>read()会读取整个文件，将读取到底的文件内容放到一个字符串变量，返回str类型。</li>
+<li>readline()读取一行内容，放到一个字符串变量，返回str类型。</li>
+<li>readlines() 读取文件所有内容，按行为单位放到一个列表中，返回list类型。</li>
+<li>xreadlines()返回一个生成器，来循环操作文件的每一行。</li>
+</ul>
+<h2 id="arg和-kwarg作用"><a href="#arg和-kwarg作用" class="headerlink" title="*arg和**kwarg作用"></a>*arg和**kwarg作用</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">定义函数时，使用*arg和**kwarg</span><br><span class="line">*arg和**kwarg 可以帮助我们处理上面这种情况，允许我们在调用函数的时候传入多个实参</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">exmaple2</span><span class="params">(required_arg, *arg, **kwarg)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> arg:</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"arg: "</span>, arg</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> kwarg:</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"kwarg: "</span>, kwarg</span><br><span class="line"></span><br><span class="line">exmaple2(<span class="string">"Hi"</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, keyword1 = <span class="string">"bar"</span>, keyword2 = <span class="string">"foo"</span>)</span><br><span class="line">&gt;&gt; arg:  (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">&gt;&gt; kwarg:  &#123;<span class="string">'keyword2'</span>: <span class="string">'foo'</span>, <span class="string">'keyword1'</span>: <span class="string">'bar'</span>&#125;</span><br><span class="line">从上面的例子可以看到，当我传入了更多实参的时候</span><br><span class="line">*arg会把多出来的位置参数转化为tuple</span><br><span class="line">**kwarg会把关键字参数转化为dict</span><br></pre></td></tr></table></figure>
 
       
 
@@ -276,7 +286,7 @@ def wrapper(*args,**kw):
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">-Python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">-python</a>
         		</li>
       		
 		</ul>
@@ -333,7 +343,7 @@ def wrapper(*args,**kw):
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#浅复制和深复制问题："><span class="toc-number">1.</span> <span class="toc-text">浅复制和深复制问题：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#映射类型："><span class="toc-number">2.</span> <span class="toc-text">映射类型：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#装饰器问题："><span class="toc-number">3.</span> <span class="toc-text">装饰器问题：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#try-except-finally处理机制："><span class="toc-number">4.</span> <span class="toc-text">try;except;finally处理机制：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#new和init的区别"><span class="toc-number">5.</span> <span class="toc-text">new和init的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编码顺序："><span class="toc-number">6.</span> <span class="toc-text">编码顺序：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下划线定义函数时应该注意："><span class="toc-number">7.</span> <span class="toc-text">下划线定义函数时应该注意：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#元组（tuple）的定义方式："><span class="toc-number">8.</span> <span class="toc-text">元组（tuple）的定义方式：</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#浅复制和深复制问题："><span class="toc-number">1.</span> <span class="toc-text">浅复制和深复制问题：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#映射类型："><span class="toc-number">2.</span> <span class="toc-text">映射类型：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#装饰器问题："><span class="toc-number">3.</span> <span class="toc-text">装饰器问题：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#try-except-finally处理机制："><span class="toc-number">4.</span> <span class="toc-text">try;except;finally处理机制：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#new和init的区别"><span class="toc-number">5.</span> <span class="toc-text">new和init的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编码顺序："><span class="toc-number">6.</span> <span class="toc-text">编码顺序：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下划线定义函数时应该注意："><span class="toc-number">7.</span> <span class="toc-text">下划线定义函数时应该注意：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#元组（tuple）的定义方式："><span class="toc-number">8.</span> <span class="toc-text">元组（tuple）的定义方式：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#python的read-、readline-、readlines-、xreadlines"><span class="toc-number">9.</span> <span class="toc-text">python的read() 、readline()、readlines()、xreadlines()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#arg和-kwarg作用"><span class="toc-number">10.</span> <span class="toc-text">*arg和**kwarg作用</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -462,7 +472,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">-随笔</a>
+                <a href="javascript:void(0)" class="js-tag color1">-数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">-python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -470,15 +484,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color5">-数据库</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color4">-随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">-Python</a>
+                <a href="javascript:void(0)" class="js-tag color5">-Git</a>
               </li>
             
             <div class="clearfix"></div>
