@@ -16,14 +16,14 @@
 <meta property="og:site_name" content="Litchi">
 <meta property="og:description" content="近期在复习数据结构时关于二叉平衡树的一些知识点汇总！">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2019/06/29/b-tree/G:/blogs/source/_posts/b-tree/1.JPG">
-<meta property="og:image" content="http://yoursite.com/2019/06/29/b-tree/G:/blogs/source/_posts/b-tree/4.JPG">
-<meta property="og:image" content="http://yoursite.com/2019/06/29/b-tree/G:/blogs/source/_posts/b-tree/5.JPG">
-<meta property="og:updated_time" content="2019-06-29T09:07:40.034Z">
+<meta property="og:image" content="http://yoursite.com/2019/06/29/b-tree/1.JPG">
+<meta property="og:image" content="http://yoursite.com/2019/06/29/b-tree/4.JPG">
+<meta property="og:image" content="http://yoursite.com/2019/06/29/b-tree/5.JPG">
+<meta property="og:updated_time" content="2019-07-01T05:37:27.397Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="B树、B-树、B+树的区别">
 <meta name="twitter:description" content="近期在复习数据结构时关于二叉平衡树的一些知识点汇总！">
-<meta name="twitter:image" content="http://yoursite.com/2019/06/29/b-tree/G:/blogs/source/_posts/b-tree/1.JPG">
+<meta name="twitter:image" content="http://yoursite.com/2019/06/29/b-tree/1.JPG">
   
   
     <link rel="icon" href="/favicon.png">
@@ -175,11 +175,13 @@
 <a id="more"></a>
 <h2 id="二叉平衡树-（B树）"><a href="#二叉平衡树-（B树）" class="headerlink" title="二叉平衡树 （B树）"></a>二叉平衡树 （B树）</h2><p> <strong>B-tree树即B树</strong>，B即Balanced，平衡的意思。因为B树的原英文名称为B-tree。</p>
 <p>先介绍下二叉搜索树</p>
-<p>​       1.所有非叶子结点<strong>至多</strong>拥有两个儿子（Left和Right）；</p>
-<p>​       2.所有结点存储一个关键字；</p>
-<p>​       3.非叶子结点的左指针指向小于其关键字的子树，右指针指向大于其关键字的子树；</p>
-<p>如：</p>
-<p><img src="/2019/06/29/b-tree/G:/blogs\source\_posts\b-tree\1.JPG" alt="1"></p>
+<pre><code>1.所有非叶子结点**至多**拥有两个儿子（Left和Right）；
+
+2.所有结点存储一个关键字；
+
+3.非叶子结点的左指针指向小于其关键字的子树，右指针指向大于其关键字的子树；
+</code></pre><p>如：</p>
+<p><img src="/2019/06/29/b-tree/./1.JPG" alt="1"></p>
 <p>二叉搜索树的搜索，从根结点开始，如果查询的关键字与结点的关键字相等，那么就命中；否则，如果查询关键字比结点关键字小，就进入左儿子；如果比结点关键字大，就进入右儿子；</p>
 <p>如果左儿子或右儿子的指针为空，则报告找不到相应的关键字；如果二叉搜索树的所有非叶子结点的左右子树的结点数目均保持差不多（平衡），那么B树的搜索性能逼近二分查找；但它比连续内存空间的二分查找的优点是，改变二叉搜索树结构（插入与删除结点）不需要移动大段的内存数据，甚至通常是常数开销；</p>
 <h2 id="B-树"><a href="#B-树" class="headerlink" title="B-树"></a>B-树</h2><p>是一种多路搜索树（并不是二叉的）：</p>
@@ -194,11 +196,14 @@
 5.非叶子结点的关键字个数=指向儿子的指针个数-1；
 
 6.非叶子结点的关键字：K[1], K[2], …, K[M-1]；且K[i] &lt; K[i+1]；
-</code></pre><p>​       7.非叶子结点的指针：P[1], P[2], …, P[M]；其中P[1]指向关键字小于K[1]的</p>
-<p>​          子树，P[M]指向关键字大于K[M-1]的子树，其它P[i]指向关键字属于(K[i-1], K[i])的子树；</p>
-<p>​       8.所有叶子结点位于同一层；</p>
-<p>如：（M=3）</p>
-<p><img src="/2019/06/29/b-tree/G:/blogs\source\_posts\b-tree\4.JPG" alt="4"></p>
+
+7.非叶子结点的指针：P[1], P[2], …, P[M]；其中P[1]指向关键字小于K[1]的
+
+   子树，P[M]指向关键字大于K[M-1]的子树，其它P[i]指向关键字属于(K[i-1], K[i])的子树；
+
+8.所有叶子结点位于同一层；
+</code></pre><p>如：（M=3）</p>
+<p><img src="/2019/06/29/b-tree/./4.JPG" alt="4"></p>
 <p>B-树的搜索，从根结点开始，对结点内的关键字（有序）序列进行二分查找，如果</p>
 <p>命中则结束，否则进入查询关键字所属范围的儿子结点；重复，直到所对应的儿子指针为</p>
 <p>空，或已经是叶子结点；</p>
@@ -210,30 +215,34 @@
 3.搜索有可能在非叶子结点结束；
 
 4.其搜索性能等价于在关键字全集内做一次二分查找；
-</code></pre><p>​       5.自动层次控制；</p>
-<h2 id="B-树-1"><a href="#B-树-1" class="headerlink" title="B+树"></a>B+树</h2><pre><code>B+树是B-树的变体，也是一种多路搜索树：
+
+5.自动层次控制；
+</code></pre><h2 id="B-树-1"><a href="#B-树-1" class="headerlink" title="B+树"></a>B+树</h2><pre><code>B+树是B-树的变体，也是一种多路搜索树：
 
 1.其定义基本与B-树同，除了：
 
 2.非叶子结点的子树指针与关键字个数相同；
-</code></pre><p>​       3.非叶子结点的子树指针P[i]，指向关键字值属于[K[i], K[i+1])的子树</p>
-<p>（B-树是开区间）；</p>
+
+3.非叶子结点的子树指针P[i]，指向关键字值属于[K[i], K[i+1])的子树
+</code></pre><p>（B-树是开区间）；</p>
 <pre><code>5.为所有叶子结点增加一个链指针；
 
 6.所有关键字都在叶子结点出现；
-</code></pre><p>​       如：（M=3）</p>
-<p><img src="/2019/06/29/b-tree/G:/blogs\source\_posts\b-tree\5.JPG" alt="5"></p>
+
+如：（M=3）
+</code></pre><p><img src="/2019/06/29/b-tree/./5.JPG" alt="5"></p>
 <p>B+的搜索与B-树也基本相同，区别是B+树只有达到叶子结点才命中（B-树可以在</p>
 <p>非叶子结点命中），其性能也等价于在关键字全集做一次二分查找；</p>
 <pre><code>B+的特性：
 
 1.所有关键字都出现在叶子结点的链表中（稠密索引），且链表中的关键字恰好
 </code></pre><p>是有序的；</p>
-<p>​       2.不可能在非叶子结点命中；</p>
-<pre><code>3.非叶子结点相当于是叶子结点的索引（稀疏索引），叶子结点相当于是存储
-</code></pre><p>（关键字）数据的数据层；</p>
-<p>​       4.更适合文件索引系统；</p>
+<pre><code>2.不可能在非叶子结点命中；
 
+3.非叶子结点相当于是叶子结点的索引（稀疏索引），叶子结点相当于是存储
+</code></pre><p>（关键字）数据的数据层；</p>
+<pre><code>4.更适合文件索引系统；
+</code></pre>
       
 
       
@@ -453,6 +462,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">-Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">-算法</a>
               </li>
             
             <div class="clearfix"></div>
